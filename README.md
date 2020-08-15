@@ -68,21 +68,35 @@ In other words, the model predicts positive class if any of the inner-nested con
  >>> from wittgenstein import Deduce as RIPPER_D
  ```
  
- 定義 ILP 可推理的推理變數及資料範圍。
+ Define the new variables and data ranges that can be inferred by ILP.
  ```python
  >>> RD = RIPPER_D.RIPPER_Deduce(df)
  ```
  
- 解析 RIPPERk 的規則集，以 FP_Tree 資料結構儲存成「規則樹」。
+ Parse the rule set of RIPPERk and save it as a "rule tree" with FP_Tree data structure.
  ```python
  >>> np_rlist = RD.ruleset_parser(ripper_Base.ruleset_)
  >>> rstree = RD.ruleset_tree(np_rlist)
  ```
  
- 基於規則進行逆歸結推理，推理的型態以
+ Reasoning based on inverse resolution.
  ```python
  >>> RD.rule_Deduce(df,rstree,nor_form='short')
  ```
+ parameter:
+ - nor_form:
+    "normal" : defalut，The new variables are the disjunction of conjunctions -- 'V' represents 'or'; '^' represents 'and'.
+    "short" : The new variables are presented by < var_i, i=0,1,2,...,n >.
+ 
+ Select feature by infomation gain。
+ ```python
+ train, test = train_test_split(df, test_size=.33)
+ df,max_feature_score = RD.feature_select(df,test,target_class='open_flag',n=col_n,round_n=4)
+ ```
+ parameter：
+ - n: Choose the new variables in the top n in infomation.
+ - round_n: defalut 4, round the infomation gain to the 'round_n'.
+ 
 
 ### Scoring
 To score our trained model, use the `score` function:
