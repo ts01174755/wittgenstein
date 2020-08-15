@@ -85,7 +85,9 @@ In other words, the model predicts positive class if any of the inner-nested con
  ```
  parameter:
  - nor_form: 
+ 
    "normal" : defalut，The new variables are the disjunction of conjunctions -- 'V' represents 'or'; '^' represents 'and'.
+ 
    "short" : The new variables are presented by < var_i, i=0,1,2,...,n >.
  
  Select feature by infomation gain。
