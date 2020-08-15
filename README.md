@@ -63,7 +63,7 @@ In other words, the model predicts positive class if any of the inner-nested con
 `IREP` models tend be higher bias, `RIPPER`'s higher variance.
 
 ### ILP with RIPPERk
- 輸入基於 RIPPERk 的 ILP package
+ Import the RIPPERk-based ILP package.
  ```python
  >>> from wittgenstein import Deduce as RIPPER_D
  ```
