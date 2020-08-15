@@ -65,7 +65,7 @@ In other words, the model predicts positive class if any of the inner-nested con
 ### ILP with RIPPERk
  Import the RIPPERk-based ILP package.
  ```python
- >>> from wittgenstein import Deduce as RIPPER_D
+ >>> from wittgenstein import deduce as RIPPER_D
  ```
  
  Define the new variables and data ranges that can be inferred by ILP.
