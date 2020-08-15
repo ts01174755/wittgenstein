@@ -62,6 +62,28 @@ In other words, the model predicts positive class if any of the inner-nested con
 
 `IREP` models tend be higher bias, `RIPPER`'s higher variance.
 
+### ILP with RIPPERk
+ 輸入基於 RIPPERk 的 ILP package
+ ```python
+ >>> from wittgenstein import Deduce as RIPPER_D
+ ```
+ 
+ 定義 ILP 可推理的推理變數及資料範圍。
+ ```python
+ >>> RD = RIPPER_D.RIPPER_Deduce(df)
+ ```
+ 
+ 解析 RIPPERk 的規則集，以 FP_Tree 資料結構儲存成「規則樹」。
+ ```python
+ >>> np_rlist = RD.ruleset_parser(ripper_Base.ruleset_)
+ >>> rstree = RD.ruleset_tree(np_rlist)
+ ```
+ 
+ 基於規則進行逆歸結推理，推理的型態以
+ ```python
+ >>> RD.rule_Deduce(df,rstree,nor_form='short')
+ ```
+
 ### Scoring
 To score our trained model, use the `score` function:
 ```python
