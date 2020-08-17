@@ -17,12 +17,12 @@ For explanation of the algorithms, see my article in _Towards Data Science_, or 
 
 To install, use
 ```bash
-$ pip install wittgenstein
+$ pip install git+https://github.com/ts01174755/wittgenstein
 ```
 
 To uninstall, use
 ```bash
-$ pip uninstall wittgenstein
+$ pip install git+https://github.com/ts01174755/wittgenstein
 ```
 
 ## Requirements
