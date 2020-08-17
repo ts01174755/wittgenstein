@@ -143,8 +143,8 @@ class RIPPER_Deduce:
                 #print(dict_tmp[topitems[col_i-1]],topitems[col_i-1])
                 #print(dict_tmp[topitems[col_i]],topitems[col_i])
                 df_list.append(topitems[col_i])
-        print('---- Top 10 feature score [0-1] ----')
-        for col in df_list[:10]:
+        print('---- Top %s feature score [0-1] ----' %n)
+        for col in df_list[:n]:
             print('  %s : %s'%(col,dict_tmp[col])) 
         print('------------------------------------')
         col_list =[]
@@ -261,7 +261,7 @@ class RIPPER_Deduce:
             encoding = self.parser(df, coder_list_tmp, symbol)
             df[coder_name] = encoding
             self.col_dict[coder_normal] = True
-            print('coder_name:%s coder_normal:%s'%(coder_name,coder_normal))
+            #print('coder_name:%s coder_normal:%s'%(coder_name,coder_normal))
         return coder_name
 
     def rule_Deduce(self,df, tree_node, absorpt=[],nor_form = 'normal'):
