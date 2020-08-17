@@ -9,7 +9,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     author="Ilan Moscovitz",
     author_email="ilan.moscovitz@gmail.com",
-    url="https://github.com/imoscovitz/wittgenstein",
+    url="https://github.com/ts01174755/wittgenstein",
     keywords=[
         "Classification",
         "Decision Rule",
