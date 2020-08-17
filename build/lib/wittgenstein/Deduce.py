@@ -120,10 +120,10 @@ class RIPPER_Deduce:
         self.col_explain = {}
         
     def Infomation_Gain(self,df,target_class):
-        X = df.iloc[:,self.columns_len:len(df)]
+        X = df.iloc[:,self.columns_len:len(df.columns)]
         Y = df[target_class]
         info_gain_value = mutual_info_classif(X ,Y ,discrete_features=True)
-        info_gain_key =  list(df.iloc[:,self.columns_len:len(df)].columns)
+        info_gain_key =  list(df.iloc[:,self.columns_len:len(df.columns)].columns)
         dictionary = dict(zip(info_gain_key, info_gain_value))
         return dictionary
     
@@ -140,12 +140,12 @@ class RIPPER_Deduce:
             if col_i == 0:
                 df_list.append(topitems[col_i])
             elif round(dict_tmp[topitems[col_i]],round_n) < round(dict_tmp[topitems[col_i-1]],round_n):
+                df_list.append(topitems[col_i])
                 #print(dict_tmp[topitems[col_i-1]],topitems[col_i-1])
                 #print(dict_tmp[topitems[col_i]],topitems[col_i])
-                df_list.append(topitems[col_i])
         print('---- Top %s feature score [0-1] ----' %n)
         for col in df_list[:n]:
-            print('  %s : %s'%(col,dict_tmp[col])) 
+            print('  %s : %s'%(col,round(dict_tmp[col],round_n))) 
         print('------------------------------------')
         col_list =[]
         for col in df.columns:
@@ -340,23 +340,23 @@ class RIPPER_Deduce:
 
 # =============================================================================
 if __name__ == "__main__":
-    tmp = [['aa',True,True,False,True,True,True,True,-5],
-           ['aa',False,True,True,False,True,True,True,-4],
-           ['aa',False,False,True,True,False,True,True,-3],
-           ['aa',True,True,True,True,True,False,True,-2],
-           ['aa',False,False,True,True,True,True,False,-1],
-           ['aa',True,True,False,True,True,True,False,0],
-           ['aa',False,True,True,True,True,True,False,6],
-           ['bb',True,True,True,False,True,True,False,7],
-           ['bb',True,False,False,True,True,False,False,8],
-           ['bb',False,False,True,True,False,True,True,9],
-           ['bb',True,True,True,True,True,True,False,10],
-           ['bb',True,True,False,True,False,True,False,11],
-           ['bb',True,False,True,True,True,True,True,12],
-           ['bb',False,True,False,False,True,True,False,13],
-           ['bb',True,True,True,False,False,True,False,14],
-           ['bb',True,False,True,True,False,True,True,15]]
-    df = pd.DataFrame(tmp,columns = ['a','b','c','d','e','f','g','h','i'])
+    tmp = [['aa',True,True,False,True,True,True,True,-5,1],
+           ['aa',False,True,True,False,True,True,True,-4,1],
+           ['aa',False,False,True,True,False,True,True,-3,1],
+           ['aa',True,True,True,True,True,False,True,-2,1],
+           ['aa',False,False,True,True,True,True,False,-1,1],
+           ['aa',True,True,False,True,True,True,False,0,1],
+           ['aa',False,True,True,True,True,True,False,6,1],
+           ['bb',True,True,True,False,True,True,False,7,0],
+           ['bb',True,False,False,True,True,False,False,8,0],
+           ['bb',False,False,True,True,False,True,True,9,0],
+           ['bb',True,True,True,True,True,True,False,10,0],
+           ['bb',True,True,False,True,False,True,False,11,0],
+           ['bb',True,False,True,True,True,True,True,12,0],
+           ['bb',False,True,False,False,True,True,False,13,0],
+           ['bb',True,True,True,False,False,True,False,14,0],
+           ['bb',True,False,True,True,False,True,True,15,0]]
+    df = pd.DataFrame(tmp,columns = ['a','b','c','d','e','f','g','h','i','Target'])
 
     rule_list = '[a=aa^b=False^d=True] V [a=aa^b=False^e=True^g=True] V [a=aa^b=False^e=True^h=False^i=-5--1] V [a=aa^b=False^f=True] V [a=aa^c=True]'
 
@@ -365,7 +365,8 @@ if __name__ == "__main__":
     np_rlist = RIPPER_rule_Deduce.ruleset_parser(rule_list)
     rstree =RIPPER_rule_Deduce.ruleset_tree(np_rlist)
     RIPPER_rule_Deduce.rule_Deduce(df,rstree,nor_form = 'short')
-    
+    df,max_feature_score = RIPPER_rule_Deduce.feature_select(df,df,target_class='Target',n=10,round_n=4)
+    RIPPER_rule_Deduce.columns_len
     RIPPER_rule_Deduce.col_explain['var_14']
     RIPPER_rule_Deduce.col_explain
     #挖掘 FP_TREE
