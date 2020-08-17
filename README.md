@@ -62,13 +62,13 @@ In other words, the model predicts positive class if any of the inner-nested con
 
 `IREP` models tend be higher bias, `RIPPER`'s higher variance.
 
-### ILP with RIPPERk
- Import the RIPPERk-based ILP package.
+### Inverse resolution with RIPPERk
+ Import the RIPPERk-based Inverse resolution package.
  ```python
  >>> from wittgenstein import deduce as RIPPER_D
  ```
  
- Define the new variables and data ranges that can be inferred by ILP.
+ Define the new variables and data ranges that can be inferred by inverse resolution.
  ```python
  >>> RD = RIPPER_D.RIPPER_Deduce(df)
  ```
